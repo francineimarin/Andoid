@@ -18,6 +18,7 @@ public class ServiceOrder implements Parcelable {
     private double mValue;
     private boolean mPaid;
     private String mDescription;
+    private boolean mActive;
 
     public ServiceOrder() {
         super();
@@ -87,6 +88,14 @@ public class ServiceOrder implements Parcelable {
         this.mDescription = description;
     }
 
+    public boolean isActive() {
+        return mActive;
+    }
+
+    public void setActive(boolean mActive) {
+        this.mActive = mActive;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,6 +105,7 @@ public class ServiceOrder implements Parcelable {
 
         if (Double.compare(that.mValue, mValue) != 0) return false;
         if (mPaid != that.mPaid) return false;
+        if (mActive != that.mActive) return false;
         if (mId != null ? !mId.equals(that.mId) : that.mId != null) return false;
         if (mClient != null ? !mClient.equals(that.mClient) : that.mClient != null) return false;
         if (mPhone != null ? !mPhone.equals(that.mPhone) : that.mPhone != null) return false;
@@ -119,6 +129,7 @@ public class ServiceOrder implements Parcelable {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (mPaid ? 1 : 0);
         result = 31 * result + (mDescription != null ? mDescription.hashCode() : 0);
+        result = 31 * result + (mActive ? 1 : 0);
         return result;
     }
 
@@ -138,6 +149,10 @@ public class ServiceOrder implements Parcelable {
 
     public static List<ServiceOrder> getAll() {
         return ServiceOrdersRepository.getInstance().getAll();
+    }
+
+    public static List<ServiceOrder> getServiceOrdersActive() {
+        return ServiceOrdersRepository.getInstance().getServiceOrdersFiltered(true);
     }
 
     public void save() {
@@ -163,6 +178,7 @@ public class ServiceOrder implements Parcelable {
         dest.writeDouble(this.mValue);
         dest.writeByte(mPaid ? (byte) 1 : (byte) 0);
         dest.writeString(this.mDescription);
+        dest.writeByte(mActive ? (byte) 1 : (byte) 0);
     }
 
     private ServiceOrder(Parcel in) {
@@ -175,6 +191,7 @@ public class ServiceOrder implements Parcelable {
         this.mValue = in.readDouble();
         this.mPaid = in.readByte() != 0;
         this.mDescription = in.readString();
+        this.mActive = in.readByte() != 0;
     }
 
     public static final Parcelable.Creator<ServiceOrder> CREATOR = new Parcelable.Creator<ServiceOrder>() {

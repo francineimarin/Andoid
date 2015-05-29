@@ -38,5 +38,8 @@
     <string name="lbl_confirm">Confirmação</string>
     <string name="lbl_share">Compartilhar</string>
     <string name="lbl_share_option">Escolha uma opção</string>
+    <string name="lbl_consult">Filtrar</string>
+    <string name="lbl_filter_active">Filtrar Ativos</string>
+    <string name="lbl_filter_inative">Filtrar Inativos</string>
 
 </resources>

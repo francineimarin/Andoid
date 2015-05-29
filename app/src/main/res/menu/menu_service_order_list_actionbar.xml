@@ -8,4 +8,24 @@
         android:icon="@mipmap/ic_action_share"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/actionConsult"
+        android:title="@string/lbl_consult"
+        android:icon="@mipmap/ic_action_share"
+        app:showAsAction="always">
+
+        <menu>
+            <item
+                android:id="@+id/search_active"
+                android:icon="@mipmap/ic_action_share"
+                android:title="@string/lbl_filter_active" />
+
+            <item
+                android:id="@+id/search_inative"
+                android:icon="@mipmap/ic_action_share"
+                android:title="@string/lbl_filter_inative" />
+        </menu>
+
+    </item>
+
 </menu>

@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(UserRepository.getInstance().authenticate(txtLogin.toString(), txtPass.toString())) {
+                if(UserRepository.getInstance().authenticate(txtLogin.getText().toString(), txtPass.getText().toString())) {
                     startActivity(new Intent(MainActivity.this, ServiceOrderListActivity.class));
                 }
             }

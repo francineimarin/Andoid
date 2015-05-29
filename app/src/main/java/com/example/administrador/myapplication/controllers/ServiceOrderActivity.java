@@ -173,6 +173,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
             mServiceOrder.setDate(serviceOrderCalendar.getTime());
             mServiceOrder.setValue(Double.valueOf(mEditTextValue.getText().toString().trim()));
             mServiceOrder.setDescription(mEditTextDescription.getText().toString().trim());
+            mServiceOrder.setActive(true);
             mServiceOrder.save();
             super.setResult(RESULT_OK);
             super.finish();

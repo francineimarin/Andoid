@@ -6,11 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.administrador.myapplication.models.entities.ServiceOrder;
 import com.example.administrador.myapplication.util.AppUtil;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public final class ServiceOrdersRepository {
 
@@ -54,6 +50,18 @@ public final class ServiceOrdersRepository {
         DatabaseHelper helper = new DatabaseHelper(AppUtil.CONTEXT);
         SQLiteDatabase db = helper.getReadableDatabase();
         Cursor cursor = db.query(ServiceOrderContract.TABLE, ServiceOrderContract.COLUNS, null, null, null, null, ServiceOrderContract.DATE);
+        List<ServiceOrder> serviceOrders = ServiceOrderContract.bindList(cursor);
+        db.close();
+        helper.close();
+        return serviceOrders;
+    }
+
+    public List<ServiceOrder> getServiceOrdersFiltered(boolean active) {
+        DatabaseHelper helper = new DatabaseHelper(AppUtil.CONTEXT);
+        SQLiteDatabase db = helper.getReadableDatabase();
+        String where = ServiceOrderContract.ACTIVE + " = ?";
+        String[] args = {active ? "1" : "0"};
+        Cursor cursor = db.query(ServiceOrderContract.TABLE, ServiceOrderContract.COLUNS, where, args, null, null, ServiceOrderContract.DATE);
         List<ServiceOrder> serviceOrders = ServiceOrderContract.bindList(cursor);
         db.close();
         helper.close();

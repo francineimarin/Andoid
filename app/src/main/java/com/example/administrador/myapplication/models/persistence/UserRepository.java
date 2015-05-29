@@ -21,13 +21,14 @@ public class UserRepository {
 
     public Boolean authenticate(String user, String password) {
         DatabaseHelper helper = new DatabaseHelper(AppUtil.CONTEXT);
-        String where = UserContract.USER + " = ? AND " + UserContract.PASSWORD + " = ?";
+        String where = UserContract.USER +" = ? AND "+ UserContract.PASSWORD + " = ? ";
         String[] args = {user, password};
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.query(UserContract.TABLE, UserContract.COLUNS, null, null, null, null, null);
-        Boolean flag = cursor.moveToFirst();
+        Cursor cursor = db.query(UserContract.TABLE, UserContract.COLUNS, where, args, null, null, null);
+        Boolean flag = cursor.moveToNext();
         db.close();
         helper.close();
+        cursor.close();
         return flag;
 
     }

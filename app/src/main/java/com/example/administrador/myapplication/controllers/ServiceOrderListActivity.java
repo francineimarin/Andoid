@@ -61,7 +61,7 @@ public class ServiceOrderListActivity extends AppCompatActivity implements Popup
     }
 
     private void updateRecyclerItens() {
-        final List<ServiceOrder> serviceOrders = ServiceOrder.getAll();
+        final List<ServiceOrder> serviceOrders = ServiceOrder.getServiceOrdersActive();
         if (mServiceOrdersAdapter == null) {
             mServiceOrdersAdapter = new ServiceOrderListAdapter(serviceOrders);
             mServiceOrders.setAdapter(mServiceOrdersAdapter);
@@ -103,7 +103,8 @@ public class ServiceOrderListActivity extends AppCompatActivity implements Popup
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // Delete and show a message
-                                serviceOrder.delete();
+                                serviceOrder.setActive(false);
+                                serviceOrder.save();
                                 Toast.makeText(ServiceOrderListActivity.this, R.string.msg_delete_success, Toast.LENGTH_LONG).show();
                                 // Update recycler view dataset
                                 updateRecyclerItens();
@@ -140,7 +141,7 @@ public class ServiceOrderListActivity extends AppCompatActivity implements Popup
             case R.id.actionShare:
                 // Create the text message with a string
                 final Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, ServiceOrder.getAll().toString());
+                sendIntent.putExtra(Intent.EXTRA_TEXT, ServiceOrder.getServiceOrdersActive().toString());
                 sendIntent.setType(HTTP.PLAIN_TEXT_TYPE);
 
                 // Create intent to show the chooser dialog
@@ -150,6 +151,9 @@ public class ServiceOrderListActivity extends AppCompatActivity implements Popup
                 if (sendIntent.resolveActivity(getPackageManager()) != null) {
                     startActivity(chooser);
                 }
+                return true;
+            case R.id.actionConsult:
+
                 return true;
         }
         return super.onOptionsItemSelected(item);

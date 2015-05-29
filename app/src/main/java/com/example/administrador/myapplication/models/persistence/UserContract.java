@@ -11,18 +11,16 @@ import java.util.List;
 public class UserContract {
 
     public static final String TABLE = "user";
-    public static final String ID = "id";
     public static final String USER = "user";
     public static final String PASSWORD = "password";
 
-    public static final String[] COLUNS = {ID, USER, PASSWORD};
+    public static final String[] COLUNS = {USER, PASSWORD};
 
     public static String createTable() {
         final StringBuilder sql = new StringBuilder();
         sql.append(" CREATE TABLE ");
         sql.append(TABLE);
         sql.append(" ( ");
-        sql.append(ID + " INTEGER PRIMARY KEY, ");
         sql.append(USER + " TEXT, ");
         sql.append(PASSWORD + " TEXT ");
         sql.append(" ); ");
@@ -47,7 +45,6 @@ public class UserContract {
 
     public static ContentValues getContentValues(User user) {
         ContentValues content = new ContentValues();
-        content.put(ID, user.getId());
         content.put(USER, user.getUser());
         content.put(PASSWORD, user.getPassword());
         return content;
@@ -56,7 +53,6 @@ public class UserContract {
     public static User bind(Cursor cursor) {
         if (!cursor.isBeforeFirst() || cursor.moveToNext()) {
             User user = new User();
-            user.setId((cursor.getInt(cursor.getColumnIndex(ID))));
             user.setUser(cursor.getString(cursor.getColumnIndex(USER)));
             user.setPassword(cursor.getString(cursor.getColumnIndex(PASSWORD)));
             return user;
