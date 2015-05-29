@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.administrador.myapplication.R;
 import com.example.administrador.myapplication.models.entities.ServiceOrder;
+import com.example.administrador.myapplication.models.persistence.ServiceOrdersRepository;
 import com.example.administrador.myapplication.util.AppUtil;
 import com.melnykov.fab.FloatingActionButton;
 
@@ -95,6 +96,28 @@ public class ServiceOrderListActivity extends AppCompatActivity implements Popup
                 goToEditActivity.putExtra(ServiceOrderActivity.EXTRA_START_BENCHMARK, SystemClock.elapsedRealtime());
                 super.startActivityForResult(goToEditActivity, REQUEST_CODE_EDIT);
                 return true;
+            case R.id.actionActive:
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.lbl_confirm_active)
+                        .setMessage(R.string.msg_active)
+                        .setPositiveButton(R.string.lbl_yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Delete and show a message
+                                serviceOrder.setActive(true);
+                                serviceOrder.save();
+                                Toast.makeText(ServiceOrderListActivity.this, R.string.msg_active_success, Toast.LENGTH_LONG).show();
+                                // Update recycler view dataset
+                                updateRecyclerItens();
+                                // Force onPrepareOptionsMenu call
+                                supportInvalidateOptionsMenu();
+                            }
+                        })
+                        .setNeutralButton(R.string.lbl_no, null)
+                        .create().show();
+                return true;
+
+
             case R.id.actionDelete:
                 new AlertDialog.Builder(this)
                         .setTitle(R.string.lbl_confirm)
@@ -155,6 +178,22 @@ public class ServiceOrderListActivity extends AppCompatActivity implements Popup
             case R.id.actionConsult:
 
                 return true;
+            case R.id.search_active:
+                mServiceOrdersAdapter.setItens(ServiceOrdersRepository.getInstance().getAll(true));
+                mServiceOrdersAdapter.notifyDataSetChanged();
+                return true;
+
+
+            case R.id.search_inative:
+                mServiceOrdersAdapter.setItens(ServiceOrdersRepository.getInstance().getAll(false));
+                mServiceOrdersAdapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.search_all:
+                mServiceOrdersAdapter.setItens(ServiceOrdersRepository.getInstance().getAll());
+                mServiceOrdersAdapter.notifyDataSetChanged();
+                return true;
+
         }
         return super.onOptionsItemSelected(item);
     }

@@ -14,4 +14,8 @@
         android:id="@+id/actionDelete"
         android:title="@string/lbl_delete" />
 
+    <item
+        android:id="@+id/actionActive"
+        android:title="@string/lbl_active_item" />
+
 </menu>

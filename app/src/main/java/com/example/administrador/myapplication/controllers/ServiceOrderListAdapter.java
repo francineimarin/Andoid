@@ -66,6 +66,9 @@ public class ServiceOrderListAdapter extends RecyclerView.Adapter<ServiceOrderLi
                 popup.setOnMenuItemClickListener((PopupMenu.OnMenuItemClickListener) context);
                 popup.inflate(R.menu.menu_service_order_list_popup);
                 popup.show();
+
+                popup.getMenu().findItem(R.id.actionDelete).setVisible(serviceOrder.isActive());
+                popup.getMenu().findItem(R.id.actionActive).setVisible(!serviceOrder.isActive());
             }
         });
     }

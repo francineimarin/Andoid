@@ -13,6 +13,8 @@
     <string name="msg_edit_success">Service order edited successfully.</string>
     <string name="msg_delete">Delete the selected service order?</string>
     <string name="msg_delete_success">Service order deleted successfully.</string>
+    <string name="msg_active_success">Order successfully activated service</string>
+    <string name="msg_active"> Activate the service order?</string>
 
     <string name="lbl_user">User</string>
     <string name="lbl_pass">Password</string>
@@ -40,5 +42,10 @@
     <string name="lbl_consult">Filtrar</string>
     <string name="lbl_filter_active">Filtrar Ativos</string>
     <string name="lbl_filter_inative">Filtrar Inativos</string>
+    <string name="lbl_filter_all">All</string>
+    <string name="lbl_active_item">Active</string>
+    <string name="lbl_confirm_active">Activate</string>
+    <string name="msg_welcome">Bem vindo</string>
+    <string name="msg_invalid_user">Usuário não cadastrado</string>
 
 </resources>

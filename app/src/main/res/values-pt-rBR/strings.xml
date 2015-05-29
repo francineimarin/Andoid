@@ -41,5 +41,12 @@
     <string name="lbl_consult">Filtrar</string>
     <string name="lbl_filter_active">Filtrar Ativos</string>
     <string name="lbl_filter_inative">Filtrar Inativos</string>
+    <string name="lbl_filter_all">Todos</string>
+    <string name="lbl_active_item">Ativar</string>
+    <string name="msg_active">Ativar a ordem de serviço?</string>
+    <string name="msg_active_success">Ordem de servico ativada com sucesso.</string>
+    <string name="lbl_confirm_active">Ativar</string>
+    <string name="msg_welcome">Bem vindo</string>
+    <string name="msg_invalid_user">Usuário não cadastrado</string>
 
 </resources>

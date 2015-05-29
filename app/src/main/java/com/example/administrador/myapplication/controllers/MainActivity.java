@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.administrador.myapplication.R;
 import com.example.administrador.myapplication.models.persistence.UserRepository;
@@ -25,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
         final EditText txtPass = AppUtil.get(findViewById(R.id.editTextPass));
         final Button btnLogin = (Button) findViewById(R.id.buttonLogin);
 
+        txtLogin.setText("Francinei");
+        txtPass.setText("123456");
+
         // Change typeface for the password field
         txtPass.setTypeface(Typeface.DEFAULT);
         txtPass.setTransformationMethod(new PasswordTransformationMethod());
@@ -34,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(UserRepository.getInstance().authenticate(txtLogin.getText().toString(), txtPass.getText().toString())) {
                     startActivity(new Intent(MainActivity.this, ServiceOrderListActivity.class));
+                    Toast.makeText(MainActivity.this, getString(R.string.msg_welcome), Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(MainActivity.this, getString(R.string.msg_invalid_user), Toast.LENGTH_LONG).show();
                 }
             }
         });

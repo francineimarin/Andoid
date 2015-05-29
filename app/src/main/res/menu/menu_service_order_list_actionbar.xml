@@ -11,19 +11,26 @@
     <item
         android:id="@+id/actionConsult"
         android:title="@string/lbl_consult"
-        android:icon="@mipmap/ic_action_share"
+        android:icon="@mipmap/ic_action_search"
         app:showAsAction="always">
 
         <menu>
             <item
                 android:id="@+id/search_active"
-                android:icon="@mipmap/ic_action_share"
+                android:icon="@mipmap/ic_action_active"
                 android:title="@string/lbl_filter_active" />
 
             <item
                 android:id="@+id/search_inative"
-                android:icon="@mipmap/ic_action_share"
+                android:icon="@mipmap/ic_action_inactive"
                 android:title="@string/lbl_filter_inative" />
+
+            <item
+                android:id="@+id/search_all"
+                android:icon="@mipmap/ic_action_active_inactive"
+                android:title="@string/lbl_filter_all" />
+
+
         </menu>
 
     </item>
